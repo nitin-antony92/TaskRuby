@@ -15,10 +15,13 @@ def write_log(name, region)
 #checking whether bucket exist
       if (bucket.exists?)
         obj = bucket.object('server.log')
-        #checking whether object exist
+#checking whether object exist
         if (obj.exists?)
+#getting the data from the file
           previous_data = obj.get.body.string
+          #appending data 
           new_data = previous_data + "\n" + entry
+#updating changes
           obj.put({ body: new_data })
         else
 
@@ -26,12 +29,15 @@ def write_log(name, region)
         end
 
       else
+#creating a new bucket    
         s3.create_bucket(bucket: name)
         bucket = s3.bucket(name)
+        #creating a new file
         obj = bucket.object('server.log')
         obj.put({ body: entry })
 
       end
+#displaying the contents of server.log
       puts obj.get.body.string
     rescue Aws::S3::Errors::ServiceError
       return "Sorry Bucket cant be created"
@@ -55,9 +61,10 @@ def list_buckets
     s3.buckets.each do |b|
 
       s3_region = b.client.get_bucket_location(bucket: b.name).location_constraint
-        # checking the bucket region
+  # checking the bucket region
 
         if (s3_region == selected_region)
+  #checking for public permission
           if (!b.acl.grants[1].nil?)
 
             puts " #{b.name} => #{b.acl.grants[1][1]}"
