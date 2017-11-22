@@ -3,14 +3,19 @@
 these scripts do the following
 
 1.append data to server.log file
+
 example 
+
 2017-11-22 02:03:29 UTC < this is my first message >
+
 2017-11-22 02:03:49 UTC < this is my second message >
+
 2.get list of all buckets and display its permission
 
 ## Getting Started
 
 To get started
+
 1.create a role which give full s3 access to the ec2 machine you wish to run this code on
 
 Or
@@ -18,9 +23,9 @@ Or
 2.create a directory /.aws/credentials in the home directory and put the below content
 [default]
 
-aws_access_key_id=<your access key>
+aws_access_key_id= your access key
 
-aws_secret_access_key=<your secret key> 
+aws_secret_access_key= your secret key 
 
 ### Prerequisites
 
