@@ -19,7 +19,9 @@ ruby should be installed in the system
 
 
 ### Installing
-gem install twitter
+gems required
+1.oauth
+2json
 
 
 
