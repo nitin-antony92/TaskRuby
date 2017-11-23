@@ -1,6 +1,6 @@
 # Getting hashtag
 
-get all the hashtag in twittter 
+get all the hashtag in twittter inputted by the user
 
 ## Getting Started
 
