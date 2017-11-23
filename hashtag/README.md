@@ -34,7 +34,7 @@ ruby hashtag.rb -hash_tag "#ruby"
 
 ##output
 
-#<Tweet text>,<Date Created>,<re tweet count>,<User name>,<User profile image url>
+<Tweet text>,<Date Created>,<re tweet count>,<User name>,<User profile image url>
 
 < RT @MoeJike: My @MatterHackers Blue Friday purchase came in! It's so pretty... #Ruby https://t.co/4nFewqvtsx >,< 2017-11-22 21:33:01 UTC >, < 2 >,< MatterHackers >,< http://pbs.twimg.com/profile_images/856654741220151296/zCWX3OP8_normal.jpg >
 
