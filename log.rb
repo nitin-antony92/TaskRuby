@@ -2,6 +2,7 @@ require 'aws-sdk'
 class Demo
 def initialize # Instance variables
  @regions = ["us-east-2", "us-east-1", "us-west-1", "us-west-2", "ap-south-1", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "sa-east-1"]
+@entry=""
 end
 def write_log(name, region)
   begin
@@ -9,7 +10,7 @@ def write_log(name, region)
     timestamp = Time.now.getutc
     puts "Enter the log message"
     log_message = gets.chomp
-    entry = "#{timestamp } < #{log_message} >"
+    @entry = "#{timestamp } < #{log_message} >"
     begin
       bucket = s3.bucket(name)
 #checking whether bucket exist
@@ -20,7 +21,7 @@ def write_log(name, region)
 #getting the data from the file
           previous_data = obj.get.body.string
           #appending data 
-          new_data = previous_data + "\n" + entry
+          new_data = previous_data + "\n" + @entry
 #updating changes
           obj.put({ body: new_data })
         else
@@ -34,7 +35,7 @@ def write_log(name, region)
         bucket = s3.bucket(name)
         #creating a new file
         obj = bucket.object('server.log')
-        obj.put({ body: entry })
+        obj.put({ body: @entry })
 
       end
 #displaying the contents of server.log
@@ -46,15 +47,16 @@ def write_log(name, region)
   rescue
     return "wrong region name entered or invalid bucket name"
   end
+  return true
 end
 
 
-def list_buckets
-  puts @regions
+def list_buckets(region)
+  #puts @regions
   a = @regions
-  puts "enter the region name"
+  #puts "enter the region name"
   #geting user input 
-  selected_region = gets.chomp
+  selected_region = region
   if a.include? selected_region
 
     s3 = Aws::S3::Resource.new(region: selected_region)
@@ -77,8 +79,9 @@ def list_buckets
       end
 
     else
-      puts "entered region doesnt exit"
+      return false
     end
+    return true
   end
 
 end
